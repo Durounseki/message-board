@@ -71,17 +71,21 @@ a{
     gap: 16px;
 }
 
+/* The style below achieves the transition height 0 to height auto */
 .form-wrapper{
     display: grid;
+    /* This sets the height of the wrapper to 0px */
     grid-template-rows: 0fr;
     transition: grid-template-rows 0.5s ease-in-out;
 }
 
 form{
+    /* Since the form is contained in a row of height 0px, the form also has height 0px, now we just need to hide the overflow */
     overflow: hidden;
 }
 
 .form-wrapper.show{
+    /* To show the form we set the height of the wrapper to fit its content */
     grid-template-rows: 1fr;
     padding-bottom: 32px;
     border-bottom: #64748b 2px solid;

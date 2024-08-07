@@ -5,7 +5,6 @@
         <script src="https://kit.fontawesome.com/a5c4f7a4d5.js" crossorigin="anonymous"></script> <!-- Font awesome for icons-->
     </head>
     <body>
-        <!-- Include the navbar component passing the locals.links added on the app.js -->
         <header>
             <h1><%= title %></h1>
             <button>
@@ -14,8 +13,10 @@
         </header>
         <div class="content">
             <div class="form-wrapper">
+                <!-- Web form with post method to /new, we catch this request on the router -->
                 <form class="new-message" method="POST" action="/new">
                     <h2>Share your thoughts</h2>
+                    <!-- The data submitted on each of the fields is available on req.body().<name> -->
                     <div class="form-field">
                         <label for="username">Name:</label>
                         <input type="text" id="username" name="username" required>
@@ -27,12 +28,14 @@
                     <button type="submit">Submit</button>
                 </form>
             </div>
+            <!-- Render the messages in reverse order so that the last message that was sent appears at the top of the board -->
             <% for(message of [...messages].reverse()){ %>
                 <div class="message">
                     <div class="user-info">
                         <p class="author">
                             <%= message.user %>
                         </p>
+                        <!-- Use the formatted date, make sure formattedDate is made available to the locals -->
                         <p class="date">
                             Sent <%= formattedDate(message.added) %>
                         </p>
@@ -48,6 +51,7 @@
         <%- include('footer', {link: locals.profileLink}) %>
     </body>
     <script>
+        //This script achieves a roll down effect of the web form on click the new message button, see the css file
         const newMessage = document.querySelector('header button');
         newMessage.addEventListener('click',showMessageForm);
 

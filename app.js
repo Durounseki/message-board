@@ -25,6 +25,18 @@ const profileLink = {
     text: "Durounseki"
 }
 
+//Error Messages
+const errors = [
+    {
+        code: "404",
+        text: "Page not found"
+    },
+    {
+        code: "500",
+        text: "Internal Server Error"
+    }
+]
+
 app.use((req, res, next) => {
     res.locals.profileLink = profileLink; // Make it available in all templates
     next();
@@ -33,9 +45,13 @@ app.use((req, res, next) => {
 //Render the views
 app.use("/",indexRouter);
 
+//404
+app.use((req, res, next) => {
+    res.status(404).render("error-page", {error: errors[0]})
+});
+// Handle middleware errors
 app.use((err, req, res, next) => {
-    console.error(err.stack); // Log the detailed error stack trace
-    res.status(500).send('Internal Server Error');
+    res.status(500).render("error-page", {error: errors[1]});
 });
 
 const PORT = 3000;
