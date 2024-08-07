@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/styles.css">
+        <script src="https://kit.fontawesome.com/a5c4f7a4d5.js" crossorigin="anonymous"></script> <!-- Font awesome for icons-->
+    </head>
+    <body>
+        <!-- Include the navbar component passing the locals.links added on the app.js -->
+        <header>
+            <h1><%= title %></h1>
+            <button>
+                New Message
+            </button>
+        </header>
+        <div class="content">
+            <div class="form-wrapper">
+                <form class="new-message" method="POST" action="/new">
+                    <h2>Share your thoughts</h2>
+                    <div class="form-field">
+                        <label for="username">Name:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="message">Your message <span>(max 150 char)</span>:</label>
+                        <textarea name="message" id="message" maxlength="150" required></textarea>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <% for(message of messages){ %>
+                <div class="message">
+                    <div class="user-info">
+                        <p class="author">
+                            <%= message.user %>
+                        </p>
+                        <p class="date">
+                            <%= message.added %>
+                        </p>
+                    </div>
+                    <div class="message-body">
+                        <p>
+                            <%= message.text %>
+                        </p>
+                    </div>
+                </div>
+            <%}%>
+        </div>
+        <%- include('footer', {link: locals.profileLink}) %>
+    </body>
+    <script>
+        const newMessage = document.querySelector('header button');
+        newMessage.addEventListener('click',showMessageForm);
+
+        function showMessageForm(){
+            const form = document.querySelector('.form-wrapper');
+            form.classList.add('show');
+        }
+    </script>
+</html>
