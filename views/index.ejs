@@ -27,14 +27,14 @@
                     <button type="submit">Submit</button>
                 </form>
             </div>
-            <% for(message of messages){ %>
+            <% for(message of [...messages].reverse()){ %>
                 <div class="message">
                     <div class="user-info">
                         <p class="author">
                             <%= message.user %>
                         </p>
                         <p class="date">
-                            <%= message.added %>
+                            Sent <%= formattedDate(message.added) %>
                         </p>
                     </div>
                     <div class="message-body">

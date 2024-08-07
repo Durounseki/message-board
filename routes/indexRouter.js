@@ -1,18 +1,30 @@
 const { Router } =  require("express");
+//Date formatting
+const dayjs = require("dayjs");
+const relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
+
+function formattedDate(date){
+    if( dayjs(date).isBefore(dayjs().subtract(1,'day')) ){
+        return dayjs(date).format('YY/MM/DD');
+    }else{
+        return dayjs(date).fromNow(true) + ' ago';
+    }
+}
 
 const indexRouter = Router();
 
+indexRouter.use( (req,res,next) => {
+    res.locals.formattedDate = formattedDate;
+    next();
+})
+
 const messages = [
     {
-      text: "Hi there!",
-      user: "Amando",
+      text: "Hi there! Feel free to share your thoughts.",
+      user: "Durounseki",
       added: new Date()
     },
-    {
-      text: "Hello World!",
-      user: "Charles",
-      added: new Date()
-    }
   ];
 
 indexRouter.get("/", ( req, res ) => {

@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require('node:path');
- 
+
 //Import routers
 const indexRouter = require("./routes/indexRouter");
 

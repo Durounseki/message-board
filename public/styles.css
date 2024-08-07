@@ -106,3 +106,8 @@ input, textarea{
     border-radius: 8px;
     border: 1px #64748b solid;
 }
+
+label span{
+    font-weight: lighter;
+}
+
