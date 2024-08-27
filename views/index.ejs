@@ -33,16 +33,16 @@
                 <div class="message">
                     <div class="user-info">
                         <p class="author">
-                            <%= message.user %>
+                            <%= message.username %>
                         </p>
                         <!-- Use the formatted date, make sure formattedDate is made available to the locals -->
                         <p class="date">
-                            Sent <%= formattedDate(message.added) %>
+                            Sent <%= formattedDate(message.timestamp,locals.userTimezone) %>
                         </p>
                     </div>
                     <div class="message-body">
                         <p>
-                            <%= message.text %>
+                            <%= message.message %>
                         </p>
                     </div>
                 </div>
